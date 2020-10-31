@@ -17,9 +17,10 @@ function writePassword() {
 function userPrompts() {
   var length = parseInt(prompt('How long do you want your password to be?'));
   var userInput = prompt('How many characters do you want your password to have?');
-  var includeNumeric = confirm("");
-  var includeCaps = confirm("");
-  
+  var includeNumeric = confirm("Do you want to have numeric characters?");
+  var includeCaps = confirm("Do you want to have capitalized charcters?");
+  var includeAlpha = confirm("Do you want to have lower cased charcters?");
+  var includeSpecial = confrim("Do you want to have special characters?");
   if (userInput < 8) {
     alert('Try again, It needs to be at least 8 characters.');
   };
