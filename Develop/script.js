@@ -1,5 +1,5 @@
 // Assignment Code
-var generateBtn = document.getElementById("#generate");
+var generateBtn = document.getElementById("generate");
 var length
 var caps = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 var special = ['#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@'];
@@ -9,7 +9,7 @@ var numeric = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  var passwordText = document.getElementById("generate");
 
   passwordText.value = password;
 
@@ -57,14 +57,36 @@ function userPrompts() {
   return passwordPrompts;
 }
 function generatePassword(){
-  var options = userPrompts();
-  alert(options)
+  var rickAstley = userPrompts(); //options
+  var passwordOptions = []; 
+   console.log(passwordOptions);
 
+    if(rickAstley.alpha){
+      for (i = 0; i < includeAlpha.length; ++i) {
+          passwordOptions.push(includeAlpha[i]);
+      }
+    }
 
+    if(rickAstley.special){
+      for (i = 0; i < includeSpecial.length; ++i) {
+          passwordOptions.push(includeSpecial[i]);
+      }
+    }
+    if(rickAstley.caps){
+      for (i = 0; i < includeCaps.length; ++i) {
+          passwordOptions.push(includeCaps[i]);
+      }
+    }
 
-
-
-
+    if(rickAstley.numeric){
+      for (i = 0; i < includeNumeric.length; ++i) {
+          passwordOptions.push(includeNumeric[i]);
+      }
+    }
+    var dannyDevito = []; // final password
+    for (let i = 0; i < rickAstley.length; ++i) {
+      var randomPick = Math.floor(Math.random() * Math.floor(rickAstley));
+    }
 
 };
 
@@ -77,7 +99,4 @@ function generatePassword(){
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", () => {
-  const length = +length 
-};
-console.log(writePassword());
+generateBtn.addEventListener("click", writePassword);
