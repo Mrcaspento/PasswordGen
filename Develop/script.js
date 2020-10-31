@@ -21,6 +21,13 @@ function userPrompts() {
   var includeCaps = confirm("Do you want to have capitalized charcters?");
   var includeAlpha = confirm("Do you want to have lower cased charcters?");
   var includeSpecial = confrim("Do you want to have special characters?");
+  var passwordPrompts = {
+    length: length,
+    caps: includeCaps,
+    numeric: includeNumeric,
+    alpha: includeAlpha,
+    special: includeSpecial
+  }
   if (userInput < 8) {
     alert('Try again, It needs to be at least 8 characters.');
   };
