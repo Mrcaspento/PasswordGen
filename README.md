@@ -1,4 +1,4 @@
 # PasswordGen
 
-![screenshot](mrcaspento.Github.io/PictureGarden/password.png)
-Format: ![Alt Text](url)
+![Password Generator](https://mrcaspento.Github.io/PictureGarden/password.png)
+
