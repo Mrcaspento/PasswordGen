@@ -5,98 +5,65 @@ var caps = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'
 var special = ['#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@'];
 var alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var numeric = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var passwordOptions = [];
+var characterCheck = []
+var passwordText = document.getElementById("password");
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.getElementById("generate");
-
-  passwordText.value = password;
-
 };
-//Down below I have the user prompts asking the specifics of how long and how many charcters it will use, and character types
-function userPrompts() {
+
+
+function getLength() {
   var length = parseInt(prompt('How long do you want your password to be?'));
-  var userInput = prompt('How many characters do you want your password to have?');
-  var includeNumeric = confirm("Do you want to have numeric characters?");
-  var includeCaps = confirm("Do you want to have capitalized charcters?");
-  var includeAlpha = confirm("Do you want to have lower cased charcters?");
-  var includeSpecial = confrim("Do you want to have special characters?");
-  
-
-  if (userInput < 8) {
-    alert('Try again, It needs to be at least 8 characters.');
-  };
-  if (userInput >= 128) {
-    alert('Try again, It needs to be less then 128 characters.');
-  };
-  
-  for (var i = userInput; userInput < 8 || userInput > 128; userInput = prompt('how long do you want your password to be?')) {
-    alert('Try again, It needs to be at least 8 charcters but less then 128 charcters.')
-  };
-  if (length > 128) {
-    alert('Try again, It needs to be less then 128 characters.')
-    return;
-  };
-  if (length < 8) {
-    alert('Try again, It needs to be at least 8 charcters long.')
-    return;
-  };
-
-  if(!includeSpecial && !includeNumeric && !includeAlpha && includeCaps){
-    alert("Your password must contain at least one lowercase, uppercase, special, or numeric character");
-    return;
-  };
-  var passwordPrompts = {
-    length: length,
-    caps: includeCaps,
-    numeric: includeNumeric,
-    alpha: includeAlpha,
-    special: includeSpecial
+  if (length > 7 && length < 129) {
+    userPrompts(length)
   }
-  return passwordPrompts;
+  else { // this is incase the user doesnt pick a charcter limit between 8-128
+    alert("not the right length")
+    getLength()
+  }
 }
-function generatePassword(){
-  var rickAstley = userPrompts(); //options
-  var passwordOptions = []; 
-   console.log(passwordOptions);
-
-    if(rickAstley.alpha){
-      for (i = 0; i < includeAlpha.length; ++i) {
-          passwordOptions.push(includeAlpha[i]);
-      }
-    }
-
-    if(rickAstley.special){
-      for (i = 0; i < includeSpecial.length; ++i) {
-          passwordOptions.push(includeSpecial[i]);
-      }
-    }
-    if(rickAstley.caps){
-      for (i = 0; i < includeCaps.length; ++i) {
-          passwordOptions.push(includeCaps[i]);
-      }
-    }
-
-    if(rickAstley.numeric){
-      for (i = 0; i < includeNumeric.length; ++i) {
-          passwordOptions.push(includeNumeric[i]);
-      }
-    }
-    var dannyDevito = []; // final password
-    for (let i = 0; i < rickAstley.length; ++i) {
-      var randomPick = Math.floor(Math.random() * Math.floor(rickAstley));
-    }
-
-};
-
-////// come back and clean this up
-// after these prompts comes the spec charcter prompts
-
-
-
-
-
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+function userPrompts(length) {
+  passwordOptions = [];
+  characterCheck = []
+  // user prompts
+  if (confirm("Do you want to have numeric characters?")) {
+    passwordOptions.push(numeric) //each confirm adds the array chosen to parent array
+    characterCheck.push(numeric[Math.floor(Math.random()*numeric.length)]) // takes the user input of length and 
+  }
+  if (confirm("Do you want to have capitalized charcters?")) {
+    passwordOptions.push(caps)
+    characterCheck.push(caps[Math.floor(Math.random()*caps.length)])
+  }
+  if (confirm('Do you want to have lower cased charcters?')) {
+    passwordOptions.push(alpha)
+    characterCheck.push(alpha[Math.floor(Math.random()*alpha.length)])
+  }
+  if (confirm('Do you want to have special characters?')) {
+    passwordOptions.push(special)
+    characterCheck.push(special[Math.floor(Math.random()*special.length)])
+  }
+  if (passwordOptions.length !== 0 ) {
+    generatePassword(length)
+  } else {
+    alert("you must select one character type")
+    userPrompts(length)
+  }
+}
+function generatePassword(length) { // this function is created after the user selects wwhat kind of charcters they want in the password
+  var pass =[] // is the random password that was generated from the prompts
+  for (let i = 0; i < length; i++) {
+    
+    var randType = passwordOptions[Math.floor(Math.random()*passwordOptions.length)] //this function takes the arrays goes through the index
+    var character = randType[Math.floor(Math.random()*randType.length)]
+    pass.push(character)
+  }
+  for (let i = 0; i < characterCheck.length; i++){
+    pass[i] = characterCheck[i]
+  }
+  pass = pass.join("")// here i have the password pushed in the text box with out "," in between each variable
+  passwordText.value = pass;
+}
+generateBtn.addEventListener("click", getLength);
