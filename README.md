@@ -1,4 +1,4 @@
 # PasswordGen
 
-![PasswordGen](assests/password.png)
+![mrcaspento.Github.io/PictureGarden/password.png](assests/password.png)
 Format: ![Alt Text](url)
