@@ -1,4 +1,4 @@
 # PasswordGen
 
-![PasswordGen](/images/logo.png)
+![PasswordGen](assests/password.png)
 Format: ![Alt Text](url)
